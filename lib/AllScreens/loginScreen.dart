@@ -1,3 +1,4 @@
+import 'package:driver_rnd_app/configMaps.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
@@ -156,11 +157,12 @@ class LoginScreen extends StatelessWidget {
         .user;
 
     if (firebaseUser != null) {
-      databaseReference
+      driverRef
           .child(firebaseUser.uid)
           .once()
           .then((DataSnapshot snap) {
         if (snap.value != null) {
+          currentfirebaseUser = firebaseUser;
           Navigator.pushNamedAndRemoveUntil(
               context, MainScreen.idScreen, (route) => false);
           displayToastMessage("acount successfully login", context);

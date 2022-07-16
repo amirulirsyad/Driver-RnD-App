@@ -135,7 +135,7 @@ class CarInfoScreen extends StatelessWidget {
       "car_model": carModelTextEditingController.text,
     };
 
-    driverRef.child(userId).child("car_details").set("carInfoMap");
+    driverRef.child(userId).child("car_details").set(carInfoMap);
 
     Navigator.pushNamedAndRemoveUntil(
         context, MainScreen.idScreen, (route) => false);
