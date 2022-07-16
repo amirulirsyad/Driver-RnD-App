@@ -25,8 +25,10 @@ DatabaseReference databaseReference =
     FirebaseDatabase.instance.reference().child("users");
 DatabaseReference driverRef =
     FirebaseDatabase.instance.reference().child("drivers");
+DatabaseReference newRequestRef = FirebaseDatabase.instance.reference().child("Ride Request");
 DatabaseReference rideRequestRef =
 FirebaseDatabase.instance.reference().child("drivers").child(currentfirebaseUser.uid).child("newRide");
+
 
 class MyApp extends StatelessWidget {
   const MyApp({Key key}) : super(key: key);
