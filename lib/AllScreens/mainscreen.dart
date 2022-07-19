@@ -4,6 +4,8 @@ import 'package:driver_rnd_app/tabsPages/profileTabPage.dart';
 import 'package:driver_rnd_app/tabsPages/ratingTabPage.dart';
 import 'package:flutter/material.dart';
 
+import '../Models/myColor.dart';
+
 class MainScreen extends StatefulWidget
 {
   static const String idScreen = "mainscreen";
@@ -77,7 +79,7 @@ class _MainScreenState extends State<MainScreen> with SingleTickerProviderStateM
           ),
         ],
         unselectedItemColor: Colors.black54,
-        selectedItemColor: Colors.yellow,
+        selectedItemColor: AppColors.secondary,
         type: BottomNavigationBarType.fixed,
         selectedLabelStyle: TextStyle(fontSize: 12.0),
         showUnselectedLabels: true,

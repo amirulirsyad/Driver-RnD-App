@@ -1,4 +1,4 @@
-import 'package:assets_audio_player/assets_audio_player.dart';
+//import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:driver_rnd_app/Models/rideDetails.dart';
 import 'package:driver_rnd_app/Notification/notificationDialog.dart';
 import 'package:driver_rnd_app/configMaps.dart';
@@ -29,7 +29,7 @@ class PushNotificationService {
 
   Future<String> getToken() async {
     String token = await firebaseMessaging.getToken();
-    databaseReference.child(currentfirebaseUser.uid).child("token").set(token);
+    driverRef.child(currentfirebaseUser.uid).child("token").set(token);
     print("This is token : " + token.toString());
 
     firebaseMessaging.subscribeToTopic("alldrivers");
@@ -56,18 +56,21 @@ class PushNotificationService {
       print("IM HERE : "+dataSnapshot.value.toString());
       if(dataSnapshot.value != null)
         {
-          assetsAudioPlayer.open(Audio("sounds/alert.mp3"));
-          assetsAudioPlayer.play();
+          //assetsAudioPlayer.open(Audio("sounds/alert.mp3"));
+          //assetsAudioPlayer.play();
 
           double pickUpLocationLat = double.parse(dataSnapshot.value['pickup']['latitude'].toString());
           double pickUpLocationLng = double.parse(dataSnapshot.value['pickup']['longitude'].toString());
           String pickUpAddress = dataSnapshot.value['pickup_address'].toString();
 
-          double dropOffLocationLat = double.parse(dataSnapshot.value['pickup']['latitude'].toString());
-          double dropOffLocationLng = double.parse(dataSnapshot.value['pickup']['longitude'].toString());
+          double dropOffLocationLat = double.parse(dataSnapshot.value['dropOff']['latitude'].toString());
+          double dropOffLocationLng = double.parse(dataSnapshot.value['dropOff']['longitude'].toString());
           String dropOffAddress = dataSnapshot.value['dropOff_address'].toString();
 
           String paymentMethod = dataSnapshot.value['payment_method'].toString();
+
+          String rider_name = dataSnapshot.value["rider_name"];
+          String rider_phone = dataSnapshot.value["rider_phone"];
 
           RideDetails rideDetails = RideDetails();
           rideDetails.ride_request_id = rideRequestId;
@@ -76,6 +79,8 @@ class PushNotificationService {
           rideDetails.pickup = LatLng(pickUpLocationLat, pickUpLocationLng);
           rideDetails.dropOff = LatLng(dropOffLocationLat, dropOffLocationLng);
           rideDetails.payment_method = paymentMethod;
+          rideDetails.rider_name = rider_name;
+          rideDetails.rider_phone = rider_phone;
 
           print("Information :: ");
           print(rideDetails.pickup_address);
